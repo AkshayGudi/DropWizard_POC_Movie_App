@@ -1,4 +1,4 @@
-package org.movie.info;
+package org.movie.model;
 
 public class MovieDetail {
 
