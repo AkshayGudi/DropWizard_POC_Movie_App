@@ -13,12 +13,11 @@ import org.movie.http.request.MovieDetail;
 
 import io.dropwizard.hibernate.AbstractDAO;
 
-public class MovieRepositiry extends AbstractDAO<Movie> {
+public class MovieRepositiry {
 
 	Map<Long, Movie> movieDb = new HashMap<Long, Movie>();
 
-	public MovieRepositiry(SessionFactory sessionFactory) {
-		super(sessionFactory);
+	public MovieRepositiry() {
 		movieDb.put(1L, new Movie(1L, "Avengers", 2000, 8));
 	}
 
