@@ -21,6 +21,12 @@ import org.movie.http.request.MovieDetail;
 import org.movie.http.response.GenericResponse;
 import org.movie.repo.MovieRepositiry;
 
+/**
+ * Rest API for Movie Resource
+ * 
+ * @author AkshayGudi
+ *
+ */
 @Path("/movies")
 @Produces(MediaType.APPLICATION_JSON)
 public class MovieResource {
@@ -31,6 +37,12 @@ public class MovieResource {
 		this.movieRepository = movieRepository;
 	}
 
+	/**
+	 * method to add movies
+	 * 
+	 * @param movieDetail
+	 * @return
+	 */
 	@Consumes(MediaType.APPLICATION_JSON)
 	@POST
 	public GenericResponse<String> createMovie(MovieDetail movieDetail) {
@@ -51,6 +63,12 @@ public class MovieResource {
 
 	}
 
+	/**
+	 * Method for fetch all movies and also to filter based in various attributes
+	 * 
+	 * @param uriInfo
+	 * @return
+	 */
 	@GET
 	public GenericResponse<List<MovieDetail>> getAllMovies(@Context UriInfo uriInfo) {
 		MultivaluedMap<String, String> queryParameters = uriInfo.getQueryParameters();
@@ -59,6 +77,12 @@ public class MovieResource {
 		return new GenericResponse<List<MovieDetail>>(movieDetailList, code);
 	}
 
+	/**
+	 * Getting Movie based on ID
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@GET
 	@Path("{Id}")
 	public GenericResponse<MovieDetail> getMovie(@PathParam("Id") String id) {
@@ -67,6 +91,13 @@ public class MovieResource {
 		return new GenericResponse<MovieDetail>(movieDetail, code);
 	}
 
+	
+	/**
+	 * Modifying existing Movie Element
+	 * 
+	 * @param movieDetail
+	 * @return
+	 */
 	@PUT
 	public GenericResponse<String> editMovie(MovieDetail movieDetail) {
 		Boolean edited = movieRepository.editMovie(movieDetail);
@@ -75,6 +106,12 @@ public class MovieResource {
 		return response;
 	}
 
+	/**
+	 * Deleting movie based on ID (unique)
+	 * 
+	 * @param id
+	 * @return
+	 */
 	@DELETE
 	@Path("{Id}")
 	public GenericResponse<String> deleteMovie(@PathParam("Id") String id) {

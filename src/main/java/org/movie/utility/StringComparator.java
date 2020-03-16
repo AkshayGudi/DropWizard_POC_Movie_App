@@ -2,6 +2,13 @@ package org.movie.utility;
 
 import java.util.List;
 
+/**
+ * String implementation of Comparator,
+ * In order to compare and filter the attributes of String datatype
+ * 
+ * @author AkshayGudi
+ *
+ */
 public class StringComparator extends AbstractComparator<String, List<String>> {
 
 	@Override

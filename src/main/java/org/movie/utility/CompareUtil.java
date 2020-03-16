@@ -9,6 +9,13 @@ import javax.ws.rs.core.MultivaluedMap;
 import org.apache.commons.collections4.CollectionUtils;
 import org.movie.domain.dao.Movie;
 
+/**
+ * This is a utility class for Simulating Db functionality of filtering and
+ * getting Movies based on various attributes
+ * 
+ * @author AkshayGudi
+ *
+ */
 public class CompareUtil {
 
 	public static List<Movie> filterAll(List<Movie> movies, MultivaluedMap<String, String> filters) {
@@ -17,7 +24,7 @@ public class CompareUtil {
 		for (Movie movie : movies) {
 			if (filter(movie, filters)) {
 				finalMovie.add(movie);
-			} 
+			}
 		}
 
 		return finalMovie;

@@ -3,6 +3,13 @@ package org.movie.utility;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Float implementation of Comparator,
+ * In order to compare and filter the attributes of float datatype
+ * 
+ * @author AkshayGudi
+ *
+ */
 public class FloatComparator extends AbstractComparator<Float,List<Float>> {
 
 	@Override

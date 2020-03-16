@@ -2,6 +2,14 @@ package org.movie.utility;
 
 import java.util.List;
 
+/**
+ * An Abstract class to implement comparison for various Data types (Integer, String Float etc)
+ * 
+ * @author AkshayGudi
+ *
+ * @param <T>
+ * @param <V>
+ */
 public abstract class AbstractComparator<T,V> {
 
 	public abstract V getValueList(List<String> compareValues);

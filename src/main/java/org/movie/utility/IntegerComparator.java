@@ -3,6 +3,13 @@ package org.movie.utility;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Integer implementation of Comparator,
+ * In order to compare and filter the attributes of Integer datatype
+ * 
+ * @author AkshayGudi
+ *
+ */
 public class IntegerComparator extends AbstractComparator<Integer,List<Integer>> {
 
 	@Override
