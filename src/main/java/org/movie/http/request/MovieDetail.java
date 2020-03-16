@@ -1,12 +1,31 @@
 package org.movie.http.request;
 
+import javax.ws.rs.DefaultValue;
+
+import org.hibernate.validator.constraints.NotEmpty;
+
 public class MovieDetail {
 
 	private Long id;
+	
+	@NotEmpty
 	private String movieName;
+	
+	@NotEmpty
 	private Integer releaseYear;
+	
+	@DefaultValue("5F")
 	private Float imdbRating;
-
+	private Float duration;
+	private String actor;
+	private String genre;
+	
+	@DefaultValue("English")
+	private String language;
+	
+	
+	private Boolean isAdult;
+	
 	public MovieDetail() {
 
 	}
@@ -43,4 +62,45 @@ public class MovieDetail {
 		this.id = id;
 	}
 
+	public Float getDuration() {
+		return duration;
+	}
+
+	public void setDuration(Float duration) {
+		this.duration = duration;
+	}
+
+	public String getActor() {
+		return actor;
+	}
+
+	public void setActor(String actor) {
+		this.actor = actor;
+	}
+
+	public String getGenre() {
+		return genre;
+	}
+
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
+	public String getLanguage() {
+		return language;
+	}
+
+	public void setLanguage(String language) {
+		this.language = language;
+	}
+
+	public Boolean getIsAdult() {
+		return isAdult;
+	}
+
+	public void setIsAdult(Boolean isAdult) {
+		this.isAdult = isAdult;
+	}
+
+	
 }

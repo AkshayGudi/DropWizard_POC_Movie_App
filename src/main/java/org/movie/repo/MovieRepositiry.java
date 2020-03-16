@@ -7,16 +7,19 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.ws.rs.core.MultivaluedMap;
+
 import org.apache.commons.collections4.CollectionUtils;
 import org.movie.domain.dao.Movie;
 import org.movie.http.request.MovieDetail;
+import org.movie.utility.CompareUtil;
 
 public class MovieRepositiry {
 
 	Map<Long, Movie> movieDb = new HashMap<Long, Movie>();
 
 	public MovieRepositiry() {
-		movieDb.put(1L, new Movie(1L, "The Avengers", 2012, 8.0F));
+		movieDb.put(1L, new Movie(1L, "Titanic", 1997, 7.8F,2.5F,"Kate Winslet","Romance","English",Boolean.FALSE));
 	}
 
 	public long addMovie(Movie movie) {
@@ -35,9 +38,26 @@ public class MovieRepositiry {
 		return newId;
 	}
 
-	public List<MovieDetail> getAllMovies() {
+	/*
+	 * public List<MovieDetail> getAllMovies() { List<Movie> movieList = new
+	 * ArrayList<Movie>(movieDb.values());
+	 * 
+	 * List<MovieDetail> movieDetailList = new ArrayList<MovieDetail>(); if
+	 * (!CollectionUtils.isEmpty(movieList)) { for (Movie movie : movieList) {
+	 * movieDetailList.add(movie.getMovieDetail()); } }
+	 * 
+	 * return movieDetailList;
+	 * 
+	 * }
+	 */
+	
+	public List<MovieDetail> getAllMovies(MultivaluedMap<String, String> queryParameters) {
 		List<Movie> movieList = new ArrayList<Movie>(movieDb.values());
 
+		if(queryParameters!=null && !queryParameters.isEmpty()) {
+			movieList = CompareUtil.filterAll(movieList, queryParameters);
+		}
+		
 		List<MovieDetail> movieDetailList = new ArrayList<MovieDetail>();
 		if (!CollectionUtils.isEmpty(movieList)) {
 			for (Movie movie : movieList) {
@@ -48,6 +68,7 @@ public class MovieRepositiry {
 		return movieDetailList;
 
 	}
+	
 
 	public MovieDetail getMovieById(String id) {
 		Long movieId = Long.parseLong(id);
@@ -69,6 +90,11 @@ public class MovieRepositiry {
 			movie.setImdbRating(movieDetail.getImdbRating());
 			movie.setMovieName(movieDetail.getMovieName());
 			movie.setReleaseYear(movieDetail.getReleaseYear());
+			movie.setActor(movieDetail.getActor());
+			movie.setDuration(movieDetail.getDuration());
+			movie.setGenre(movieDetail.getGenre());
+			movie.setLanguage(movieDetail.getLanguage());
+			movie.setIsAdult(movieDetail.getIsAdult());
 
 			movieDb.put(movieId, movie);
 		} else {
