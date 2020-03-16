@@ -18,7 +18,7 @@ import org.movie.http.request.MovieDetail;
 import org.movie.http.response.GenericResponse;
 import org.movie.repo.MovieRepositiry;
 
-@Path("/movie")
+@Path("/movies")
 @Produces(MediaType.APPLICATION_JSON)
 public class MovieResource {
 
@@ -32,33 +32,30 @@ public class MovieResource {
 	@POST
 	public GenericResponse<String> createMovie(MovieDetail movieDetail) {
 
-		System.out.println("In create");
-
 		Movie movie = new Movie();
 		movie.setMovieName(movieDetail.getMovieName());
 		movie.setImdbRating(movieDetail.getImdbRating());
-		movie.setYearOfRelease(movieDetail.getReleaseYear());
+		movie.setReleaseYear(movieDetail.getReleaseYear());
 
-		long create = movieRepository.addMovie(movie);
+		movieRepository.addMovie(movie);
 
-		System.out.println("done " + create);
 		return new GenericResponse<String>("Success", 201);
 
 	}
 
 	@GET
-	public GenericResponse<List<Movie>> getAllMovies() {
-		List<Movie> movieList = movieRepository.getAllMovies();
-		int code = CollectionUtils.isEmpty(movieList) ? 204 : 200;
-		return new GenericResponse<List<Movie>>(movieList, code);
+	public GenericResponse<List<MovieDetail>> getAllMovies() {
+		List<MovieDetail> movieDetailList = movieRepository.getAllMovies();
+		int code = CollectionUtils.isEmpty(movieDetailList) ? 204 : 200;
+		return new GenericResponse<List<MovieDetail>>(movieDetailList, code);
 	}
 
 	@GET
 	@Path("{Id}")
-	public GenericResponse<Movie> getMovie(@PathParam("Id") String id) {
-		Movie movie = movieRepository.getMovieById(id);
-		int code = movie == null ? 204 : 200;
-		return new GenericResponse<Movie>(movie, code);
+	public GenericResponse<MovieDetail> getMovie(@PathParam("Id") String id) {
+		MovieDetail movieDetail = movieRepository.getMovieById(id);
+		int code = movieDetail == null ? 204 : 200;
+		return new GenericResponse<MovieDetail>(movieDetail, code);
 	}
 
 	@PUT
@@ -77,5 +74,5 @@ public class MovieResource {
 				: new GenericResponse<String>("Movie not found", 200);
 		return response;
 	}
-
+	
 }

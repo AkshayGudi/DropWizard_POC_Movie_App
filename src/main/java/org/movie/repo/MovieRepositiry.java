@@ -7,18 +7,16 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
-import org.hibernate.SessionFactory;
+import org.apache.commons.collections4.CollectionUtils;
 import org.movie.domain.dao.Movie;
 import org.movie.http.request.MovieDetail;
-
-import io.dropwizard.hibernate.AbstractDAO;
 
 public class MovieRepositiry {
 
 	Map<Long, Movie> movieDb = new HashMap<Long, Movie>();
 
 	public MovieRepositiry() {
-		movieDb.put(1L, new Movie(1L, "Avengers", 2000, 8));
+		movieDb.put(1L, new Movie(1L, "The Avengers", 2012, 8.0F));
 	}
 
 	public long addMovie(Movie movie) {
@@ -37,17 +35,25 @@ public class MovieRepositiry {
 		return newId;
 	}
 
-	public List<Movie> getAllMovies() {
+	public List<MovieDetail> getAllMovies() {
 		List<Movie> movieList = new ArrayList<Movie>(movieDb.values());
-		return movieList;
+
+		List<MovieDetail> movieDetailList = new ArrayList<MovieDetail>();
+		if (!CollectionUtils.isEmpty(movieList)) {
+			for (Movie movie : movieList) {
+				movieDetailList.add(movie.getMovieDetail());
+			}
+		}
+
+		return movieDetailList;
 
 	}
 
-	public Movie getMovieById(String id) {
+	public MovieDetail getMovieById(String id) {
 		Long movieId = Long.parseLong(id);
 		Movie movie = movieDb.get(movieId);
-
-		return movie;
+		MovieDetail movieDetail = movie != null ? movie.getMovieDetail() : null;
+		return movieDetail;
 
 	}
 
@@ -62,7 +68,7 @@ public class MovieRepositiry {
 			movie.setId(movieDetail.getId());
 			movie.setImdbRating(movieDetail.getImdbRating());
 			movie.setMovieName(movieDetail.getMovieName());
-			movie.setYearOfRelease(movieDetail.getReleaseYear());
+			movie.setReleaseYear(movieDetail.getReleaseYear());
 
 			movieDb.put(movieId, movie);
 		} else {

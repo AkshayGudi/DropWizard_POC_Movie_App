@@ -17,7 +17,7 @@ public class MovieApplication extends Application<MovieConfiguration> {
 	public void run(MovieConfiguration configuration, Environment environment) throws Exception {
 
 		final HealthCheckResource healthCheck = new HealthCheckResource("TEST");
-		environment.healthChecks().register("template", healthCheck);
+		environment.healthChecks().register("movie-app", healthCheck);
 
 		MovieRepositiry movieRepository = new MovieRepositiry();
 		environment.jersey().register(new MovieResource(movieRepository));

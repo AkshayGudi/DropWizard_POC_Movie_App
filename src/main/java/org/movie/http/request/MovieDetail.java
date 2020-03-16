@@ -5,7 +5,7 @@ public class MovieDetail {
 	private Long id;
 	private String movieName;
 	private Integer releaseYear;
-	private Integer imdbRating;
+	private Float imdbRating;
 
 	public MovieDetail() {
 
@@ -27,11 +27,11 @@ public class MovieDetail {
 		this.releaseYear = releaseYear;
 	}
 
-	public Integer getImdbRating() {
+	public Float getImdbRating() {
 		return imdbRating;
 	}
 
-	public void setImdbRating(Integer imdbRating) {
+	public void setImdbRating(Float imdbRating) {
 		this.imdbRating = imdbRating;
 	}
 
@@ -43,6 +43,4 @@ public class MovieDetail {
 		this.id = id;
 	}
 
-	
-	
 }
